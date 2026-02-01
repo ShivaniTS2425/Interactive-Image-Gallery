@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Beauty Of Nature</title>
+<style>
+  body {
+    padding: 25px;
+    font-family: Arial, sans-serif;
+    background: white;
+  }
+
+  .title {
+    color: black;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 150px;        /* fixed height for uniform size */
+    object-fit: cover;    /* crops to fill */
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(92,106,196,0.5);
+  }
+
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #000;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .close {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+  }
+
+  .close:hover {
+    color: #5C6AC4;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
+</head>
+<body>
+  <h1 class="title">Beauty Of Nature</h1>
+  <div class="gallery">
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.56%20PM.jpeg" alt="Image 1" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.57%20PM2.jpeg" alt="Image 2" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.57%20PM3.jpeg" alt="Image 3" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.57%20PM4.jpeg" alt="Image 4" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.59%20PM6.jpeg" alt="Image 5" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.50.59%20PM7.jpeg" alt="Image 6" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.51.00%20PM8.jpeg" alt="Image 7" />
+    <img src="https://uploads.onecompiler.io/44brfuch6/44cbeqdqh/WhatsApp%20Image%202026-02-01%20at%207.51.01%20PM9.jpeg" alt="Image 8" />
+  </div>
+
+  <div id="lightbox" class="lightbox" style="display:none;">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Expanded Image" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        // Show the clicked image in bigger size in the lightbox
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    document.querySelector('.close').addEventListener('click', () => {
+      document.getElementById('lightbox').style.display = 'none';
+    });
+
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) {
+        e.currentTarget.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
